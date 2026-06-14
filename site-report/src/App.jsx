@@ -101,7 +101,7 @@ function App() {
       };
 
       await fetch(
-          "https://script.google.com/macros/s/AKfycby7Plc-AShY6xingSbXWxNc-zNuTy2Kpel1LTVXWVPf2qk-T7-RVUBoVkDeYnrgTs-n3Q/exec",
+          "https://script.google.com/macros/s/AKfycbxTevxn9nrt4iVQtqwTUIVUhxwTFNuQHcukEbYxG9M2Q41dzmfDumkvlQCrpINED35zLQ/exec",
           {
             method: "POST",
             mode: "no-cors",
