@@ -187,7 +187,7 @@ function App() {
 
           <label>Work Completion (%)</label>
           <input
-              type="number"
+              type="text"
               name="completion"
               value={formData.completion}
               onChange={handleChange}
