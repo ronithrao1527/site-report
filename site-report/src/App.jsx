@@ -11,19 +11,22 @@ function App() {
     engineerName: "",
     expenses: "",
     completion: "",
+    maleLabour: "",
+    femaleLabour: "",
+    labourPayment: "",
+    materialUsed: "",
+    requiredMaterial: "",
     remarks: "",
-    requiredMaterial: ""
+    tomorrowSchedule: "",
+    workStatus: ""
   });
 
   const [photo, setPhoto] = useState(null);
   const [preview, setPreview] = useState(null);
 
   useEffect(() => {
-
     const updateTime = () => {
-      setDateTime(
-          new Date().toLocaleString("en-IN")
-      );
+      setDateTime(new Date().toLocaleString("en-IN"));
     };
 
     updateTime();
@@ -31,29 +34,22 @@ function App() {
     const timer = setInterval(updateTime, 1000);
 
     return () => clearInterval(timer);
-
   }, []);
 
   const handleChange = (e) => {
-
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
-
   };
 
   const handlePhotoChange = (e) => {
-
     const file = e.target.files[0];
 
     if (file) {
       setPhoto(file);
-      setPreview(
-          URL.createObjectURL(file)
-      );
+      setPreview(URL.createObjectURL(file));
     }
-
   };
 
   const uploadImage = async () => {
@@ -93,8 +89,14 @@ function App() {
         engineerName: formData.engineerName,
         expenses: formData.expenses,
         completion: formData.completion,
-        remarks: formData.remarks,
+        maleLabour: formData.maleLabour,
+        femaleLabour: formData.femaleLabour,
+        labourPayment: formData.labourPayment,
+        materialUsed: formData.materialUsed,
         requiredMaterial: formData.requiredMaterial,
+        remarks: formData.remarks,
+        tomorrowSchedule: formData.tomorrowSchedule,
+        workStatus: formData.workStatus,
         photoUrl
       };
 
@@ -110,15 +112,21 @@ function App() {
           }
       );
 
-      alert("Report Submitted Successfully");
+      alert("✅ Report Submitted Successfully");
 
       setFormData({
         siteName: "",
         engineerName: "",
         expenses: "",
         completion: "",
+        maleLabour: "",
+        femaleLabour: "",
+        labourPayment: "",
+        materialUsed: "",
+        requiredMaterial: "",
         remarks: "",
-        requiredMaterial: ""
+        tomorrowSchedule: "",
+        workStatus: ""
       });
 
       setPhoto(null);
@@ -128,7 +136,7 @@ function App() {
 
       console.error(error);
 
-      alert("Submission Failed");
+      alert("❌ Submission Failed");
     }
   };
 
@@ -180,18 +188,45 @@ function App() {
           <label>Work Completion (%)</label>
           <input
               type="number"
-              min="0"
-              max="100"
               name="completion"
               value={formData.completion}
               onChange={handleChange}
+              min="0"
+              max="100"
               required
           />
 
-          <label>Remarks</label>
+          <label>Male Labour</label>
+          <input
+              type="number"
+              name="maleLabour"
+              value={formData.maleLabour}
+              onChange={handleChange}
+              min="0"
+          />
+
+          <label>Female Labour</label>
+          <input
+              type="number"
+              name="femaleLabour"
+              value={formData.femaleLabour}
+              onChange={handleChange}
+              min="0"
+          />
+
+          <label>Labour Payment (₹)</label>
+          <input
+              type="number"
+              name="labourPayment"
+              value={formData.labourPayment}
+              onChange={handleChange}
+              min="0"
+          />
+
+          <label>Material Used Today</label>
           <textarea
-              name="remarks"
-              value={formData.remarks}
+              name="materialUsed"
+              value={formData.materialUsed}
               onChange={handleChange}
           />
 
@@ -201,6 +236,34 @@ function App() {
               value={formData.requiredMaterial}
               onChange={handleChange}
           />
+
+          <label>Remarks</label>
+          <textarea
+              name="remarks"
+              value={formData.remarks}
+              onChange={handleChange}
+          />
+
+          <label>Tomorrow Work Schedule</label>
+          <textarea
+              name="tomorrowSchedule"
+              value={formData.tomorrowSchedule}
+              onChange={handleChange}
+          />
+
+          <label>Work Status</label>
+          <select
+              name="workStatus"
+              value={formData.workStatus}
+              onChange={handleChange}
+              required
+          >
+            <option value="">Select Status</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+            <option value="Delayed">Delayed</option>
+            <option value="Material Pending">Material Pending</option>
+          </select>
 
           <label>Site Photo</label>
 
